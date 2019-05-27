@@ -49,6 +49,21 @@ class AppDynamicsJob(unittest.TestCase):
         self.assertEqual("6", driver.find_element_by_xpath(
             "(.//*[normalize-space(text()) and normalize-space(.)='Your answers show up on this side.'])[1]/following::span[12]").text)
 
+    def test_calc_regression(self):
+        driver = self.driver
+        driver.get("https://www.desmos.com/scientific")
+        self.assertEqual(u"$$\n÷", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[35]").text)
+        self.assertEqual(u"$$\n×", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[77]").text)
+        self.assertEqual(u"$$\n−", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[114]").text)
+        self.assertEqual("$$\n+", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='ans'])[1]/following::span[1]").text)
+        self.assertEqual(u"$$\na\nb", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[119]").text)
+        self.assertEqual("$$\n%", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[82]").text)
+        self.assertEqual("$$\nsin", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[87]").text)
+        self.assertEqual("$$\ncos", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[91]").text)
+        self.assertEqual("$$\ntan", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[95]").text)
+        self.assertEqual("$$\nn", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[49]").text)
+        self.assertEqual(u"$$\nπ", driver.find_element_by_xpath("(.//*[normalize-space(text()) and normalize-space(.)='clear all'])[1]/following::span[57]").text)
+
     def is_element_present(self, how, what):
         try:
             self.driver.find_element(by=how, value=what)
